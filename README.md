@@ -1,10 +1,10 @@
-# Horizon â€” a launcher for Fire TV
+# Horizon — a launcher for Fire TV
 
-A calm, Apple TVâ€“inspired home screen for Amazon Fire TV sticks, with three layouts:
+A calm, Apple TV–inspired home screen for Amazon Fire TV sticks, with three layouts:
 
-- **Swatch** â€” your apps as a mosaic of paint-swatch colour blocks, with a clock hero, colour presets and seasons
-- **Theater** â€” a dark glass window over a blurred wallpaper
-- **Classic** â€” a full-screen photo with a dock of apps
+- **Swatch** — your apps as a mosaic of paint-swatch colour blocks, with a clock hero, colour presets and seasons
+- **Theater** — a dark glass window over a blurred wallpaper
+- **Classic** — a full-screen photo with a dock of apps
 
 Works on Fire TV devices running **Fire OS** (Fire TV Stick 4K / 4K Max, Lite, Cube and similar).
 It does **not** work on Vega OS devices (some 2025 models such as the Fire TV Stick 4K Select).
@@ -14,8 +14,8 @@ It does **not** work on Vega OS devices (some 2025 models such as the Fire TV St
 ## Install (about 2 minutes, no computer needed)
 
 1. On the Fire TV, open the **Appstore**, search for **Downloader** (by AFTVnews) and install it.
-2. Go to **Settings â†’ My Fire TV â†’ About** and click the device name 7 times to turn on Developer Options.
-3. In **Settings â†’ My Fire TV â†’ Developer Options â†’ Install unknown apps**, turn **Downloader** on.
+2. Go to **Settings → My Fire TV → About** and click the device name 7 times to turn on Developer Options.
+3. In **Settings → My Fire TV → Developer Options → Install unknown apps**, turn **Downloader** on.
 4. Open Downloader and enter this address:
 
    ```
@@ -30,8 +30,8 @@ Fire OS doesn't let apps replace the Amazon home screen directly. Horizon uses a
 (an accessibility service) that brings Horizon forward whenever the Amazon home screen appears.
 Fire OS hides it from the TV's Accessibility menu, so it's switched on with ADB from a computer:
 
-1. On the Fire TV: **Developer Options â†’ ADB Debugging â†’ On**. Note the IP address under
-   **Settings â†’ My Fire TV â†’ About â†’ Network**.
+1. On the Fire TV: **Developer Options → ADB Debugging → On**. Note the IP address under
+   **Settings → My Fire TV → About → Network**.
 2. On a computer, install Google's [Android platform-tools](https://developer.android.com/tools/releases/platform-tools)
    and run (replace `192.168.1.50` with the Fire TV's address, and allow the prompt that appears on the TV):
 
@@ -63,6 +63,6 @@ This lets Horizon see the current song and whether it's playing; it doesn't read
 ## Credits & licences
 
 - Built-in wallpaper photos are from Wikimedia Commons (CC BY-SA / CC0 / Free Art License);
-  each photographer is credited on screen and in **Settings â†’ About**.
+  each photographer is credited on screen and in **Settings → About**.
 - Fonts: Instrument Serif by Rodrigo Fuenzalida & Jordan Egstad, SIL Open Font License 1.1.
 - Horizon isn't affiliated with Amazon, Apple or any app shown on it.
