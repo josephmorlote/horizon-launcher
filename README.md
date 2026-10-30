@@ -1,8 +1,11 @@
 # Horizon — a launcher for Fire TV
 
-A calm, Apple TV–inspired home screen for Amazon Fire TV sticks, with three layouts:
+A calm, Apple TV–inspired home screen for Amazon Fire TV sticks, with four layouts:
 
 - **Swatch** — your apps as a mosaic of paint-swatch colour blocks, with a clock hero, colour presets and seasons
+- **Tile** — the same idea as rounded colour cards with gaps, like a palette sheet
+
+Swatch and Tile also have a **Monochrome** colour theme: every tile becomes a shade of one colour you pick.
 - **Theater** — a dark glass window over a blurred wallpaper
 - **Classic** — a full-screen photo with a dock of apps
 
@@ -46,18 +49,19 @@ Fire OS hides it from the TV's Accessibility menu, so it's switched on with ADB 
    (If you use another launcher's helper, such as Projectivy's, this replaces it.)
 3. Press Home. Turn **ADB Debugging** back off when you're done if you like.
 
-### Optional: show what Spotify is playing (Swatch layout)
+### Optional: show what Spotify is playing (Swatch and Tile layouts)
 
 ```
 adb shell cmd notification allow_listener com.horizon.launcher/com.horizon.launcher.media.NowPlayingListener
 ```
 
+While music plays, the clock tile shows the song, artist and cover art; it goes back to the clock when you pause.
 This lets Horizon see the current song and whether it's playing; it doesn't read your notifications.
 
 ## Tips
 
 - Hold **Select** (or press **Menu**) on any app for options: favourites, tile colour, hide, app info, uninstall.
-- In Swatch, select the clock for **Settings**. Settings only shows what applies to your layout.
+- In Swatch and Tile, select the clock for **Settings** (while music plays, it opens Spotify instead; hold Select for Settings). Settings only shows what applies to your layout.
 - Horizon returns to its home view after a minute without input, and on every Home press.
 
 ## Credits & licences
