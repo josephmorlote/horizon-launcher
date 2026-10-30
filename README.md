@@ -16,16 +16,18 @@ It does **not** work on Vega OS devices (some 2025 models such as the Fire TV St
 
 ## Install (about 2 minutes, no computer needed)
 
+> **Downloader code: 9379510**
+
 1. On the Fire TV, open the **Appstore**, search for **Downloader** (by AFTVnews) and install it.
 2. Go to **Settings → My Fire TV → About** and click the device name 7 times to turn on Developer Options.
 3. In **Settings → My Fire TV → Developer Options → Install unknown apps**, turn **Downloader** on.
-4. Open Downloader and enter this address:
+4. Open Downloader and enter the code **9379510** (or this address, which does the same thing):
 
    ```
    https://github.com/josephmorlote/horizon-launcher/releases/latest/download/Horizon.apk
    ```
 
-5. Choose **Install**, then **Open**. That link always points to the newest version, so use it again to update.
+5. Choose **Install**, then **Open**. The code and link always point to the newest version, so use them again to update.
 
 ## Make the Home button open Horizon (optional, needs a computer once)
 
