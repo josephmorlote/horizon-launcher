@@ -16,6 +16,8 @@ A calm, design-led home screen for Amazon Fire TV sticks, with nine themes:
 
 Each theme has its own colours, type and options, and **Saved Looks** to keep a setup and switch back to it any time.
 
+Horizon arrives fully set up: it comes with a full set of photos, gradients and the Halloween video built in, and starts with the same themes, colours, pages and favourites as the original setup. Change anything in Settings.
+
 Works on Fire TV devices running **Fire OS** (Fire TV Stick 4K / 4K Max, Lite, Cube and similar).
 It does **not** work on Vega OS devices (some 2025 models such as the Fire TV Stick 4K Select).
 
@@ -36,7 +38,14 @@ It does **not** work on Vega OS devices (some 2025 models such as the Fire TV St
 
 5. Choose **Install**, then **Open**. The code and link always point to the newest version, so use them again to update.
 
-## Make the Home button open Horizon (optional, needs a computer once)
+## Make the Home button open Horizon (optional)
+
+**From the TV (no computer or phone):** turn on **Settings → My Fire TV → Developer Options → ADB Debugging**
+(if you don't see Developer Options, click the device name 7 times under **My Fire TV → About**), then in Horizon
+open **Settings → Home Button Setup → Set Up Home Button** and choose **OK** when the TV asks to allow debugging.
+You can turn ADB Debugging off again afterwards.
+
+**Or with a computer:**
 
 Fire OS doesn't let apps replace the Amazon home screen directly. Horizon uses a small helper
 (an accessibility service) that brings Horizon forward whenever the Amazon home screen appears.
