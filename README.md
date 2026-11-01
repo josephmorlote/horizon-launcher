@@ -38,14 +38,28 @@ It does **not** work on Vega OS devices (some 2025 models such as the Fire TV St
 
 5. Choose **Install**, then **Open**. The code and link always point to the newest version, so use them again to update.
 
-## Make the Home button open Horizon (optional)
+## Make Horizon your home screen (one click, no computer)
 
-**From the TV (no computer or phone):** turn on **Settings → My Fire TV → Developer Options → ADB Debugging**
-(if you don't see Developer Options, click the device name 7 times under **My Fire TV → About**), then in Horizon
-open **Settings → Home Button Setup → Set Up Home Button** and choose **OK** when the TV asks to allow debugging.
-You can turn ADB Debugging off again afterwards.
+This makes the **Home button** open Horizon, makes the Fire TV **start on Horizon** whenever it's switched on,
+and switches on **Now Playing**, all in one go from the TV:
 
-**Or with a computer:**
+1. Turn on **Settings → My Fire TV → Developer Options → ADB Debugging**.
+   (No Developer Options? Go to **My Fire TV → About** and press Select on the device name 7 times.)
+2. In Horizon, open **Settings → Home Button Setup → Set Up Home Button**.
+3. A box **"Allow USB debugging?"** appears on the TV: tick **Always allow** and choose **Allow**.
+4. It shows each step as it goes and finishes with **Done**. Press Home to try it. You can turn ADB Debugging off again.
+
+If something's not right, the page says what (and the **Check** rows below it show ADB Debugging, the helper and
+Now Playing at a glance). If the "Allow" box never appeared or you chose Cancel, turn ADB Debugging off and on, then
+choose Set Up Home Button again.
+
+## Updating
+
+**Settings → Check for Updates** finds the newest Horizon and installs it from the TV. Your themes, Saved Looks,
+favourites and photos stay as they are. (With **Download Updates Automatically** on, new versions download quietly
+and wait there for you.) The Downloader code above always gets the newest version too.
+
+**Or set up the Home button with a computer:**
 
 Fire OS doesn't let apps replace the Amazon home screen directly. Horizon uses a small helper
 (an accessibility service) that brings Horizon forward whenever the Amazon home screen appears.
@@ -80,7 +94,8 @@ This lets Horizon see the current song and whether it's playing; it doesn't read
 
 - Hold **Select** (or press **Menu**) on any app for options: Edit Page / Change Photo, colour, favourites, rearrange, hide, app info, uninstall.
 - Press **Left** from the home view to open **Settings** (turn this off in Settings if you prefer). Settings only shows what applies to your theme.
-- **Your own pictures:** Editorial and Passive use photos and gradients you add yourself (Settings → About explains how); Horizon never goes online.
+- **Your own pictures:** Editorial, Passive, Scroll and Window use photos and gradients you add yourself (Settings → About explains how). Every image picker has filters at the top (flowers, mountains, sea, warm, dark…).
+- Horizon only goes online to check GitHub for updates.
 - Horizon returns to its home view on every Home press.
 
 ## Credits & licences
