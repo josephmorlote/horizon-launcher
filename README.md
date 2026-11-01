@@ -1,3 +1,5 @@
+![Horizon](logo.png)
+
 # Horizon — a launcher for Fire TV
 
 A calm, design-led home screen for Amazon Fire TV sticks, with eight themes:
