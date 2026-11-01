@@ -2,7 +2,7 @@
 
 # Horizon — a launcher for Fire TV
 
-A calm, design-led home screen for Amazon Fire TV sticks, with eight themes:
+A calm, design-led home screen for Amazon Fire TV sticks, with nine themes:
 
 - **Editorial** — every app a magazine cover: your own photos, a library of cover styles (Masthead, Split, Interview, Quarterly, Monograph, Objects, Plate, Guide…), one typography across every page, and an always-on slideshow
 - **Passive** — a quiet page of words over a carousel of photographs that open as you move, with a clock chip that becomes a Now Playing card
@@ -12,6 +12,7 @@ A calm, design-led home screen for Amazon Fire TV sticks, with eight themes:
 - **Scroll** — a quiet list of names beside big grainy gradient art (or your own gradients)
 - **Classic** — a full-screen photo with a dock of apps
 - **Dots** — a dot-matrix screen where light follows you
+- **Halloween** — one video of your choice, full screen and looping (a party backdrop), with what's playing; Select opens Spotify
 
 Each theme has its own colours, type and options, and **Saved Looks** to keep a setup and switch back to it any time.
 
