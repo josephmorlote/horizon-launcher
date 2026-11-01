@@ -1,13 +1,17 @@
 # Horizon — a launcher for Fire TV
 
-A calm, Apple TV–inspired home screen for Amazon Fire TV sticks, with four layouts:
+A calm, design-led home screen for Amazon Fire TV sticks, with eight themes:
 
+- **Editorial** — every app a magazine cover: your own photos, a library of cover styles (Masthead, Split, Interview, Quarterly, Monograph, Objects, Plate, Guide…), one typography across every page, and an always-on slideshow
+- **Passive** — a quiet page of words over a carousel of photographs that open as you move, with a clock chip that becomes a Now Playing card
 - **Swatch** — your apps as a mosaic of paint-swatch colour blocks, with a clock hero, colour presets and seasons
 - **Tile** — the same idea as rounded colour cards with gaps, like a palette sheet
-
-Swatch and Tile also have a **Monochrome** colour theme: every tile becomes a shade of one colour you pick.
-- **Theater** — a dark glass window over a blurred wallpaper
+- **Tabs** — bright stacked tabs with big bold names that open as you move
+- **Scroll** — a quiet list of names beside big grainy gradient art (or your own gradients)
 - **Classic** — a full-screen photo with a dock of apps
+- **Dots** — a dot-matrix screen where light follows you
+
+Each theme has its own colours, type and options, and **Saved Looks** to keep a setup and switch back to it any time.
 
 Works on Fire TV devices running **Fire OS** (Fire TV Stick 4K / 4K Max, Lite, Cube and similar).
 It does **not** work on Vega OS devices (some 2025 models such as the Fire TV Stick 4K Select).
@@ -51,24 +55,25 @@ Fire OS hides it from the TV's Accessibility menu, so it's switched on with ADB 
    (If you use another launcher's helper, such as Projectivy's, this replaces it.)
 3. Press Home. Turn **ADB Debugging** back off when you're done if you like.
 
-### Optional: show what Spotify is playing (Swatch and Tile layouts)
+### Optional: show what's playing
 
 ```
 adb shell cmd notification allow_listener com.horizon.launcher/com.horizon.launcher.media.NowPlayingListener
 ```
 
-While music plays, the clock tile shows the song, artist and cover art; it goes back to the clock when you pause.
+While music plays, every theme shows the song, artist and cover art; it goes back to normal when you pause.
 This lets Horizon see the current song and whether it's playing; it doesn't read your notifications.
 
 ## Tips
 
-- Hold **Select** (or press **Menu**) on any app for options: favourites, tile colour, hide, app info, uninstall.
-- In Swatch and Tile, select the clock for **Settings** (while music plays, it opens Spotify instead; hold Select for Settings). Settings only shows what applies to your layout.
-- Horizon returns to its home view after a minute without input, and on every Home press.
+- Hold **Select** (or press **Menu**) on any app for options: Edit Page / Change Photo, colour, favourites, rearrange, hide, app info, uninstall.
+- Press **Left** from the home view to open **Settings** (turn this off in Settings if you prefer). Settings only shows what applies to your theme.
+- **Your own pictures:** Editorial and Passive use photos and gradients you add yourself (Settings → About explains how); Horizon never goes online.
+- Horizon returns to its home view on every Home press.
 
 ## Credits & licences
 
-- Built-in wallpaper photos are from Wikimedia Commons (CC BY-SA / CC0 / Free Art License);
+- Classic's built-in wallpaper photos are from Wikimedia Commons (CC BY-SA / CC0 / Free Art License);
   each photographer is credited on screen and in **Settings → About**.
 - Fonts: Instrument Serif by Rodrigo Fuenzalida & Jordan Egstad, SIL Open Font License 1.1.
 - Horizon isn't affiliated with Amazon, Apple or any app shown on it.
