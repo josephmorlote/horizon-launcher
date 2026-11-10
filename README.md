@@ -12,6 +12,8 @@ A calm, design-led home screen for Amazon Fire TV sticks, with nine themes:
 - **Scroll** — a quiet list of names beside big grainy gradient art (or your own gradients)
 - **Classic** — a full-screen photo with a dock of apps
 - **Dots** — a dot-matrix screen where light follows you
+- **Onyx** — pure black and hairlines: a ruled grid of names where the one you're on turns white
+- **Syntax** — your apps as a file in a code editor, in Tokyo Night, Dracula, Nord, Catppuccin and more
 - **Halloween** — one video of your choice, full screen and looping (a party backdrop), with what's playing; Select opens Spotify
 
 Each theme has its own colours, type and options, and **Saved Looks** to keep a setup and switch back to it any time.
@@ -99,6 +101,21 @@ adb shell pm grant com.horizon.launcher android.permission.READ_LOGS
 Then restart the Fire TV, and pick an app for each button under **Settings → Remote Buttons**.
 Fire OS handles those four buttons itself, so Horizon has to watch the system log to see a press;
 this permission allows that. The app printed on the button still starts for a moment before yours takes over.
+
+### Optional: tune up the Fire TV itself
+
+**Settings → System → Device Tune-Up** shows which of Amazon's background services are on, frees memory,
+and can block Fire OS updates by DNS (with a free NextDNS profile). On older Fire OS versions it can also
+turn Amazon's ads, tracking, Live TV, Alexa voice and the system updater off from the TV.
+
+Newer Fire OS versions don't let any app on the TV do that last part. For those, use a Windows PC on the same Wi-Fi once:
+
+1. On the Fire TV, turn on **Developer Options → ADB Debugging**. Device Tune-Up shows the TV's address.
+2. Download **Tune Up Fire TV.cmd** and **tune-up-firetv.ps1** from this page into one folder.
+3. Double-click **Tune Up Fire TV.cmd**, type the TV's address, and answer the questions. It fetches Google's adb tool by itself.
+4. On the TV, choose **Allow** when it asks about USB debugging.
+
+Nothing is uninstalled: running it again and choosing "put everything back" (or a factory reset) restores everything.
 
 ## Tips
 
