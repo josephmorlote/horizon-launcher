@@ -90,11 +90,23 @@ adb shell cmd notification allow_listener com.horizon.launcher/com.horizon.launc
 While music plays, every theme shows the song, artist and cover art; it goes back to normal when you pause.
 This lets Horizon see the current song and whether it's playing; it doesn't read your notifications.
 
+### Optional: choose what the remote's app buttons open
+
+```
+adb shell pm grant com.horizon.launcher android.permission.READ_LOGS
+```
+
+Then restart the Fire TV, and pick an app for each button under **Settings → Remote Buttons**.
+Fire OS handles those four buttons itself, so Horizon has to watch the system log to see a press;
+this permission allows that. The app printed on the button still starts for a moment before yours takes over.
+
 ## Tips
 
 - Hold **Select** (or press **Menu**) on any app for options: Edit Page / Change Photo, colour, favourites, rearrange, hide, app info, uninstall.
 - Press **Left** from the home view to open **Settings** (turn this off in Settings if you prefer). Settings only shows what applies to your theme.
 - **Your own pictures:** Editorial, Passive, Scroll and Window use photos and gradients you add yourself (Settings → About explains how). Every image picker has filters at the top (flowers, mountains, sea, warm, dark…).
+- **Photos from your phone:** Settings → Look → **Add Photos from Phone** shows a QR code. Scan it with a phone on the same Wi-Fi and choose pictures; they appear under the **Personal** filter in every image picker. The TV only listens while that page is open, and only on your home network.
+- **Dark Mode** (top of Settings) gives each theme its own dark design. **Night Mode** just dims the screen.
 - Horizon only goes online to check GitHub for updates.
 - Horizon returns to its home view on every Home press.
 
