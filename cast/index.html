@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Horizon Cast</title>
+<meta name="description" content="Show your computer's screen on a Fire TV running Horizon, from any browser.">
+<style>
+  :root {
+    --bg: #0e0e10; --panel: #18181b; --line: #2a2a2f; --ink: #f2f1ee; --dim: #9a9aa2;
+    --accent: #f2f1ee; --accent-ink: #0e0e10; --good: #34c759; --bad: #ff6b5e;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f4f3f0; --panel: #ffffff; --line: #e2e0db; --ink: #151517; --dim: #6b6b72;
+      --accent: #151517; --accent-ink: #ffffff;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 16px;
+    background: var(--bg); color: var(--ink);
+    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main { width: 100%; max-width: 440px; }
+  h1 { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 6px; }
+  p.lead { color: var(--dim); margin: 0 0 28px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
+  label { display: block; font-size: 13px; color: var(--dim); margin-bottom: 8px; }
+  input {
+    width: 100%; font: 600 30px/1 ui-monospace, "SF Mono", Consolas, monospace; letter-spacing: 0.3em;
+    text-align: center; padding: 14px 10px; border-radius: 12px; border: 1px solid var(--line);
+    background: var(--bg); color: var(--ink); outline: none;
+  }
+  input:focus { border-color: var(--ink); }
+  button {
+    width: 100%; margin-top: 16px; padding: 15px; border: 0; border-radius: 12px; cursor: pointer;
+    font: 600 17px/1 inherit; background: var(--accent); color: var(--accent-ink);
+  }
+  button:disabled { opacity: 0.4; cursor: default; }
+  button.quiet { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .status { display: flex; align-items: center; gap: 10px; margin-top: 18px; min-height: 24px; font-size: 14px; color: var(--dim); }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--line); flex: none; }
+  .dot.live { background: var(--good); box-shadow: 0 0 0 4px color-mix(in srgb, var(--good) 25%, transparent); }
+  .dot.bad { background: var(--bad); }
+  ol { color: var(--dim); font-size: 14px; padding-left: 20px; margin: 22px 0 0; }
+  ol li { margin: 4px 0; }
+  .note { color: var(--dim); font-size: 12.5px; margin-top: 18px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Horizon Cast</h1>
+  <p class="lead">Show this computer's screen on your Fire TV. Nothing to install.</p>
+  <div class="card">
+    <label for="code">Code on the TV</label>
+    <input id="code" inputmode="numeric" autocomplete="off" maxlength="7" placeholder="000 000">
+    <button id="share">Share screen</button>
+    <button id="stop" class="quiet" hidden>Stop</button>
+    <div class="status"><span id="dot" class="dot"></span><span id="status">On the TV, open Horizon's AirPlay tile and choose Cast from Computer.</span></div>
+  </div>
+  <ol>
+    <li>The TV and this computer must be on the same Wi-Fi.</li>
+    <li>Choose <b>Share screen</b>, then pick <b>Entire screen</b> (or one window).</li>
+    <li>To stop, press Stop here or Back on the TV remote.</li>
+  </ol>
+  <p class="note" id="audioNote">Sound comes along from Chrome and Edge (tick "Share system audio"). Firefox and Zen send the picture only.</p>
+</main>
+<script src="peerjs.min.js"></script>
+<script>
+const $ = (id) => document.getElementById(id);
+const codeBox = $("code"), shareBtn = $("share"), stopBtn = $("stop");
+let peer = null, call = null, stream = null;
+
+// The TV's code: from the link the TV shows (?tv=123456), else the last one used here.
+const fromLink = new URLSearchParams(location.search).get("tv");
+codeBox.value = format(fromLink || safeGet("horizonCastCode") || "");
+codeBox.addEventListener("input", () => { codeBox.value = format(codeBox.value); });
+
+function format(v) { const d = String(v).replace(/\D/g, "").slice(0, 6); return d.length > 3 ? d.slice(0, 3) + " " + d.slice(3) : d; }
+function digits() { return codeBox.value.replace(/\D/g, ""); }
+function safeGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+function safeSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+function say(text, state) {
+  $("status").textContent = text;
+  $("dot").className = "dot" + (state === "live" ? " live" : state === "bad" ? " bad" : "");
+}
+
+shareBtn.addEventListener("click", async () => {
+  const code = digits();
+  if (code.length !== 6) { say("Type the 6-digit code shown on the TV.", "bad"); codeBox.focus(); return; }
+  safeSet("horizonCastCode", code);
+  shareBtn.disabled = true;
+  try {
+    stream = await navigator.mediaDevices.getDisplayMedia({
+      video: { frameRate: { ideal: 30, max: 30 }, width: { max: 1920 }, height: { max: 1080 } },
+      audio: true,
+      // Chrome/Edge: offer the whole screen first and don't list this tab.
+      monitorTypeSurfaces: "include", selfBrowserSurface: "exclude", surfaceSwitching: "include", systemAudio: "include",
+    });
+  } catch (e) {
+    shareBtn.disabled = false;
+    say(e && e.name === "NotAllowedError" ? "Sharing was cancelled." : "This browser couldn't share the screen.", "bad");
+    return;
+  }
+  const video = stream.getVideoTracks()[0];
+  // Text and windows stay sharp; motion gives way first.
+  if (video && "contentHint" in video) video.contentHint = "detail";
+  video.addEventListener("ended", stop);
+  say("Connecting to the TV…");
+  connect(code);
+});
+
+stopBtn.addEventListener("click", stop);
+
+function connect(code) {
+  peer = new Peer(undefined, { config: { iceServers: [{ urls: "stun:stun.l.google.com:19302" }] } });
+  peer.on("open", () => {
+    call = peer.call("horizon-cast-" + code, stream);
+    if (!call) { fail("Couldn't reach the TV."); return; }
+    const pc = call.peerConnection;
+    let shown = false;
+    pc.addEventListener("connectionstatechange", () => {
+      if (pc.connectionState === "connected" && !shown) {
+        shown = true;
+        tune(pc);
+        say("Showing on the TV.", "live");
+        shareBtn.hidden = true; stopBtn.hidden = false;
+      } else if (pc.connectionState === "failed") {
+        fail("The TV couldn't be reached on this network. Are both on the same Wi-Fi?");
+      } else if (pc.connectionState === "disconnected" || pc.connectionState === "closed") {
+        if (shown) stop();
+      }
+    });
+    call.on("close", () => { if (stream) stop(); });
+    // No answer within 12 seconds: the TV isn't waiting with that code.
+    setTimeout(() => { if (!shown && call) fail("No TV is waiting with that code. Check the code, and that Cast from Computer is open on the TV."); }, 12000);
+  });
+  peer.on("error", (e) => {
+    fail(e && e.type === "peer-unavailable" ? "No TV is waiting with that code. Check it, and that Cast from Computer is open on the TV." : "Couldn't connect (" + (e && e.type || "network") + "). Try again.");
+  });
+}
+
+// A clear picture at a steady pace: up to 8 Mbps, 30 frames a second.
+async function tune(pc) {
+  for (const sender of pc.getSenders()) {
+    if (!sender.track || sender.track.kind !== "video") continue;
+    const p = sender.getParameters();
+    if (!p.encodings || !p.encodings.length) p.encodings = [{}];
+    p.encodings[0].maxBitrate = 8000000;
+    p.encodings[0].maxFramerate = 30;
+    try { await sender.setParameters(p); } catch (e) {}
+  }
+}
+
+function fail(text) { cleanUp(); say(text, "bad"); }
+function stop() { cleanUp(); say("Stopped. Share again any time.", ""); }
+function cleanUp() {
+  if (stream) { stream.getTracks().forEach((t) => t.stop()); stream = null; }
+  if (call) { try { call.close(); } catch (e) {} call = null; }
+  if (peer) { try { peer.destroy(); } catch (e) {} peer = null; }
+  shareBtn.hidden = false; shareBtn.disabled = false; stopBtn.hidden = true;
+}
+</script>
+</body>
+</html>
