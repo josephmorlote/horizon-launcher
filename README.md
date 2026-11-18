@@ -117,12 +117,23 @@ Newer Fire OS versions don't let any app on the TV do that last part. For those,
 
 Nothing is uninstalled: running it again and choosing "put everything back" (or a factory reset) restores everything.
 
+### Cast from a computer (any browser, nothing to install)
+
+1. On the TV, open Horizon's **AirPlay** tile and choose **Cast from Computer**. It shows a 6-digit code.
+2. On the computer (same Wi-Fi), open **https://josephmorlote.github.io/horizon-launcher/cast** in any browser (Chrome, Edge, Firefox, Zen…) and type the code.
+3. Choose **Share screen**, then **Entire screen** or one window. Press **Select** on the remote to switch between the whole picture and filling the TV.
+
+Sound comes along from Chrome and Edge (tick "Share system audio"); Firefox-based browsers send the picture only.
+The page and the TV find each other through PeerJS's free public service; the picture itself goes directly over your home network.
+Windows' own Ctrl+K casting can't reach any app on a Fire TV, which is why this uses the browser instead.
+
 ## Tips
 
 - Hold **Select** (or press **Menu**) on any app for options: Edit Page / Change Photo, colour, favourites, rearrange, hide, app info, uninstall.
 - Press **Left** from the home view to open **Settings** (turn this off in Settings if you prefer). Settings only shows what applies to your theme.
 - **Your own pictures:** Editorial, Passive, Scroll and Window use photos and gradients you add yourself (Settings → About explains how). Every image picker has filters at the top (flowers, mountains, sea, warm, dark…).
 - **Photos from your phone:** Settings → Look → **Add Photos from Phone** shows a QR code. Scan it with a phone on the same Wi-Fi and choose pictures; they appear under the **Personal** filter in every image picker. The TV only listens while that page is open, and only on your home network.
+- **Settings** opens where you left it, with the TV's Wi-Fi, memory, heat and storage always shown at the top.
 - **Dark Mode** (top of Settings) gives each theme its own dark design. **Night Mode** just dims the screen.
 - Horizon only goes online to check GitHub for updates.
 - Horizon returns to its home view on every Home press.
